@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="js-cflow">
+      <UniqueIdentifier>{7ae682e4-4192-4a4b-98b5-94177fe18784}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd;</Extensions>
+    </Filter>
+    <Filter Include="posix">
+      <UniqueIdentifier>{3271cffb-7764-4bff-8d5c-e1c39d207735}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="win">
+      <UniqueIdentifier>{ca4dd571-00b2-4553-abc7-169f49b02916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{d80f2e1d-f2e0-4eef-8d1b-ff61eaca49a2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\win\dllmain.cpp">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\js-cflow.c">
+      <Filter>js-cflow</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\posix\stdbool.h">
+      <Filter>posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\posix\platform.h">
+      <Filter>posix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\config.h">
+      <Filter>js-cflow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utils\macros.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\js-cflow.h">
+      <Filter>js-cflow</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
