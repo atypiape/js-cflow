@@ -18,6 +18,9 @@
     <Filter Include="utils">
       <UniqueIdentifier>{d80f2e1d-f2e0-4eef-8d1b-ff61eaca49a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="duktape">
+      <UniqueIdentifier>{feb95acd-f7e4-4918-ba30-f8546aabe4b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\win\dllmain.cpp">
@@ -25,6 +28,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\js-cflow.c">
       <Filter>js-cflow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\utils\file_sys.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\3rd\duktape\duktape.c">
+      <Filter>duktape</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +51,15 @@
     </ClInclude>
     <ClInclude Include="..\..\src\js-cflow.h">
       <Filter>js-cflow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utils\file_sys.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\3rd\duktape\duk_config.h">
+      <Filter>duktape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\3rd\duktape\duktape.h">
+      <Filter>duktape</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

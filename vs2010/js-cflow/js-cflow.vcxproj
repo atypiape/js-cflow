@@ -147,14 +147,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\3rd\duktape\duktape.c" />
     <ClCompile Include="..\..\src\js-cflow.c" />
+    <ClCompile Include="..\..\src\utils\file_sys.c" />
     <ClCompile Include="..\..\src\win\dllmain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\3rd\duktape\duktape.h" />
+    <ClInclude Include="..\..\src\3rd\duktape\duk_config.h" />
     <ClInclude Include="..\..\src\config.h" />
     <ClInclude Include="..\..\src\js-cflow.h" />
     <ClInclude Include="..\..\src\posix\platform.h" />
     <ClInclude Include="..\..\src\posix\stdbool.h" />
+    <ClInclude Include="..\..\src\utils\file_sys.h" />
     <ClInclude Include="..\..\src\utils\macros.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

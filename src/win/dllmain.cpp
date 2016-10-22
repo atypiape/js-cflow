@@ -1,6 +1,6 @@
 #include "../config.h"
 
-#if defined(W2X_WINDOWS) && !defined(JS_CFLOW_STATIC_LIB)
+#if defined(_WINDOWS) && !defined(JS_CFLOW_STATIC_LIB)
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -18,4 +18,4 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	return TRUE;
 }
 
-#endif /* W2X_WINDOWS */
+#endif /* _WINDOWS */

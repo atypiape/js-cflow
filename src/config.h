@@ -12,7 +12,7 @@
 
 
 /* build dynamic library */
-#if !defined(JS_CFLOW_STATIC_LIB) && defined(__cplusplus) && defined(W2X_WINDOWS) 
+#if !defined(JS_CFLOW_STATIC_LIB) && defined(__cplusplus) && defined(_WINDOWS)
 #  if defined(JS_CFLOW_EXPORTS)
 #    define JS_CFLOW_API __declspec(dllexport)
 #  else

@@ -5,26 +5,28 @@
  E-MAIL: atypiape@163.com
  ******************************************************************************/
 
-#ifndef __W2X_PLATFORM_H__
-#define __W2X_PLATFORM_H__
+#ifndef __JS_CFLOW_PLATFORM_H__
+#define __JS_CFLOW_PLATFORM_H__
 
 
 #if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64) \
      || defined(__WIN32__) || defined(__TOS_WIN__) || defined(__WINDOWS__)
-#  define W2X_WINDOWS
-#endif
-
-
-#if !defined(W2X_EXTERN_C)
-#  if defined(__cplusplus)
-#    define W2X_EXTERN_C extern "C"
-#  else
-#    define W2X_EXTERN_C extern
+#  if !defined(_WINDOWS)
+#    define _WINDOWS
 #  endif
 #endif
 
 
-#if defined(W2X_WINDOWS)
+#if !defined(EXTERN_C)
+#  if defined(__cplusplus)
+#    define EXTERN_C extern "C"
+#  else
+#    define EXTERN_C extern
+#  endif
+#endif
+
+
+#if defined(_WINDOWS)
 
 #  include <sdkddkver.h>
 
@@ -35,7 +37,7 @@
 #  include "stdbool.h"
 #endif
 
-#else /* !W2X_WINDOWS */
+#else /* !_WINDOWS */
 
 #  include <stdbool.h>
 
@@ -43,8 +45,9 @@
 #  define _chdir	chdir
 #  define _popen	popen
 #  define _pclose	pclose
+#  define _stricmp	stricmp
 
-#endif /* W2X_WINDOWS */
+#endif /* _WINDOWS */
 
 
 #include <stdint.h>
@@ -84,4 +87,4 @@
 #endif
 
 
-#endif /* __W2X_PLATFORM_H__ */
+#endif /* __JS_CFLOW_PLATFORM_H__ */
