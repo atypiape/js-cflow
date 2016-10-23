@@ -35,6 +35,9 @@
     <ClCompile Include="..\..\src\3rd\duktape\duktape.c">
       <Filter>duktape</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\utils\text_list.c">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\posix\stdbool.h">
@@ -60,6 +63,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\3rd\duktape\duktape.h">
       <Filter>duktape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utils\text_list.h">
+      <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

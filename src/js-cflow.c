@@ -9,21 +9,14 @@
 #include <assert.h>
 #include "3rd/duktape/duktape.h"
 #include "utils/file_sys.h"
+#include "utils/text_list.h"
 
-struct JsCFlowTextList {
-	char *text;
-	struct JsCFlowTextList *next;
-};
-typedef struct JsCFlowTextList JsCFlowTextList;
 
 struct {
 	JsCFlowTextList *js_files;
 } js_cflow_global = {0};
 
 
-static JsCFlowResult js_cflow_add_text(JsCFlowTextList **_list, const char *_text);
-static void js_cflow_remove_all_text(JsCFlowTextList **_list);
-static bool js_cflow_has_text(const JsCFlowTextList *_list, const char *_text);
 static JsCFlowResult js_cflow_execute_js(const char *_js_file);
 static JsCFlowResult js_cflow_push_api(duk_context *_duk_ctx);
 static duk_ret_t js_cflow_on_import_scripts(duk_context *_duk_ctx);
@@ -37,11 +30,15 @@ JsCFlowResult js_cflow_start(const char *_js_file)
 		return result;
 	}
 
-	js_cflow_add_text(&(js_cflow_global.js_files), _js_file);
+	if (false == js_cflow_text_list_create(&(js_cflow_global.js_files))) {
+		return kJsCFlowResultAllocMemoryError;
+	}
+
+	js_cflow_text_list_add(js_cflow_global.js_files, _js_file);
 
 	result = js_cflow_execute_js(_js_file);
 
-	js_cflow_remove_all_text(&(js_cflow_global.js_files));
+	js_cflow_text_list_destory(&(js_cflow_global.js_files));
 
 	return kJsCFlowResultSucceed;
 }
@@ -117,9 +114,10 @@ static duk_ret_t js_cflow_on_import_scripts(duk_context *_duk_ctx)
 
 	for (i = 0; i < argc; ++i) {
 		file_path = file_pathes[i];
-		if (js_cflow_has_text(js_cflow_global.js_files, file_path)) {
+		if (js_cflow_text_list_has(js_cflow_global.js_files, file_path)) {
 			continue; // ignore self
 		}
+		js_cflow_text_list_add(js_cflow_global.js_files, file_path);
 
 		result = js_cflow_read_file_content((void **)&js_str, file_path);
 		if (JsCFlowFailed(result)) {
@@ -140,89 +138,3 @@ static duk_ret_t js_cflow_on_import_scripts(duk_context *_duk_ctx)
 }
 
 
-static JsCFlowResult js_cflow_add_text(JsCFlowTextList **_list, const char *_text)
-{
-	size_t bytes = 0;
-	char *item = NULL;
-
-	assert(_list);
-	assert(_text);
-	if (NULL == _list || NULL == _text) {
-		return kJsCFlowResultInvalidArguments;
-	}
-
-	assert('\0' != _text[0]);
-	if ('\0' == _text[0]) {
-		return kJsCFlowResultInvalidArguments;
-	}
-	bytes = strlen(_text) + 1;
-
-	while (NULL != *_list) {
-		_list = &((*_list)->next);
-	}
-
-	*_list = (JsCFlowTextList *)malloc(sizeof(JsCFlowTextList));
-	assert(_list);
-	if (NULL == _list) {
-		return kJsCFlowResultAllocMemoryError;
-	}
-
-	(*_list)->next = NULL;
-	(*_list)->text = (char *)malloc(bytes);
-	assert((*_list)->text);
-	if (NULL == (*_list)->text) {
-		free(*_list);
-		return kJsCFlowResultAllocMemoryError;
-	}
-	memcpy(item, _text, bytes);
-
-	return kJsCFlowResultSucceed;
-}
-
-
-static void js_cflow_remove_all_text(JsCFlowTextList **_list)
-{
-	JsCFlowTextList *curr_node = NULL;
-	JsCFlowTextList *next_node = NULL;
-
-	assert(_list);
-	if (NULL == _list) {
-		return;
-	}
-	if (NULL == *_list) {
-		return;
-	}
-
-	curr_node = *_list;
-	*_list = NULL;
-	while (curr_node) {
-		if (NULL != curr_node->text) {
-			free(curr_node->text);
-		}
-		next_node = curr_node->next;
-		free(curr_node);
-		curr_node = next_node;
-	}
-}
-
-
-static bool js_cflow_has_text(const JsCFlowTextList *_list, const char *_text)
-{
-	assert(_list);
-	assert(_text);
-	if (NULL == _list || NULL == _text) {
-		return false;
-	}
-
-	while (_list) {
-		if (NULL == _list->text) {
-			continue;
-		}
-		if (0 == _stricmp(_list->text, _text)) {
-			return true;
-		}
-		_list = _list->next;
-	}
-
-	return false;
-}

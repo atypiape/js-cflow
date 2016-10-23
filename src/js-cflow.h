@@ -22,6 +22,7 @@ typedef enum {
 	kJsCFlowResultScriptError		= 7,
 } JsCFlowResult;
 
+
 #define JsCFlowFailed(_result) (kJsCFlowResultSucceed != (_result))
 #define JsCFlowAssert(_result) assert(kJsCFlowResultSucceed == (_result))
 

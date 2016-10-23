@@ -150,6 +150,7 @@
     <ClCompile Include="..\..\src\3rd\duktape\duktape.c" />
     <ClCompile Include="..\..\src\js-cflow.c" />
     <ClCompile Include="..\..\src\utils\file_sys.c" />
+    <ClCompile Include="..\..\src\utils\text_list.c" />
     <ClCompile Include="..\..\src\win\dllmain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="..\..\src\posix\stdbool.h" />
     <ClInclude Include="..\..\src\utils\file_sys.h" />
     <ClInclude Include="..\..\src\utils\macros.h" />
+    <ClInclude Include="..\..\src\utils\text_list.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
