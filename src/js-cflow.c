@@ -10,6 +10,7 @@
 #include "3rd/duktape/duktape.h"
 #include "utils/file_sys.h"
 #include "utils/text_list.h"
+#include "module.h"
 
 
 struct {
@@ -20,6 +21,7 @@ struct {
 static JsCFlowResult js_cflow_execute_js(const char *_js_file);
 static JsCFlowResult js_cflow_push_api(duk_context *_duk_ctx);
 static duk_ret_t js_cflow_on_import_scripts(duk_context *_duk_ctx);
+static duk_ret_t js_cflow_on_api_call(duk_context *_duk_ctx);
 
 
 EXTERN_C JS_CFLOW_API
@@ -88,6 +90,9 @@ static JsCFlowResult js_cflow_push_api(duk_context *_duk_ctx)
 	duk_push_c_function(_duk_ctx, js_cflow_on_import_scripts, DUK_VARARGS);
 	duk_put_global_string(_duk_ctx, "importScripts");
 
+	duk_push_c_function(_duk_ctx, js_cflow_on_api_call, DUK_VARARGS);
+	duk_put_global_string(_duk_ctx, "jsCFlowApiCall");
+
 	return kJsCFlowResultSucceed;
 }
 
@@ -134,7 +139,26 @@ static duk_ret_t js_cflow_on_import_scripts(duk_context *_duk_ctx)
 	}
 
 	free(file_pathes);
+
 	return 0;
 }
 
 
+static duk_ret_t js_cflow_on_api_call(duk_context *_duk_ctx)
+{
+	duk_idx_t argc = duk_get_top(_duk_ctx);
+	assert(3 <= argc);
+	if (3 <= argc) {
+		const char *dll_name = duk_require_string(_duk_ctx, 0);
+		const char *api_name = duk_require_string(_duk_ctx, 1);
+		const duk_int_t retval_type = duk_get_type(_duk_ctx, 2);
+		assert(dll_name);
+		assert(api_name);
+		if (NULL != dll_name && NULL != api_name) {
+			return js_cflow_call_api(_duk_ctx, dll_name, api_name,
+				retval_type, argc - 3, 3);
+		}
+	}
+
+	return DUK_RET_SYNTAX_ERROR;
+}

@@ -11,15 +11,19 @@
     </Filter>
     <Filter Include="posix">
       <UniqueIdentifier>{3271cffb-7764-4bff-8d5c-e1c39d207735}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd;</Extensions>
     </Filter>
     <Filter Include="win">
       <UniqueIdentifier>{ca4dd571-00b2-4553-abc7-169f49b02916}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd;</Extensions>
     </Filter>
     <Filter Include="utils">
       <UniqueIdentifier>{d80f2e1d-f2e0-4eef-8d1b-ff61eaca49a2}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd;</Extensions>
     </Filter>
     <Filter Include="duktape">
       <UniqueIdentifier>{feb95acd-f7e4-4918-ba30-f8546aabe4b3}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd;</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -38,12 +42,12 @@
     <ClCompile Include="..\..\src\utils\text_list.c">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\module.c">
+      <Filter>js-cflow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\posix\stdbool.h">
-      <Filter>posix</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\posix\platform.h">
       <Filter>posix</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\config.h">
@@ -66,6 +70,12 @@
     </ClInclude>
     <ClInclude Include="..\..\src\utils\text_list.h">
       <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\module.h">
+      <Filter>js-cflow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\platform.h">
+      <Filter>js-cflow</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

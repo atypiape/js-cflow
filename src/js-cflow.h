@@ -20,6 +20,7 @@ typedef enum {
 	kJsCFlowResultHeapCreateFailed	= 5,
 	kJsCFlowResultAllocMemoryError	= 6,
 	kJsCFlowResultScriptError		= 7,
+	kJsCFlowResultSystemCallError	= 8,
 } JsCFlowResult;
 
 

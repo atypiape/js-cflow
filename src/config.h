@@ -8,7 +8,7 @@
 #ifndef __JS_CFLOW_CONFIG_H__
 #define __JS_CFLOW_CONFIG_H__
 
-#include "posix/platform.h"
+#include "platform.h"
 
 
 /* build dynamic library */
